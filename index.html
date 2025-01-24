@@ -107,11 +107,11 @@ player.maxQualitySelector({
 		  displayCurrentQuality: false,
 	  });
 	}(window, window.videojs));
-  
-  var player = videojs('videoPlayer');
+  var player = videojs('my-video');
 player.maxQualitySelector({
-  'defaultQuality': 2 // Make the video start playing at the highest quality possible
+  'autoLabel': 'ABR' // Change the label from 'Auto' (default) to 'ABR'.
 });
+ 
       </script>    
       
       

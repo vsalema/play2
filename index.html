@@ -1,128 +1,90 @@
-﻿<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-         
-<script async src="https://www.googletagmanager.com/gtag/js?id=GTM-WND5TJ "></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<meta charset="UTF-8">
+<meta name="referrer" content="no-referrer">
 
-  gtag('config', 'GTM-WND5TJ ');
-</script>
+<head>
+<script src="https://tvradiozap.eu/js/open52.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/video.js@latest/dist/video.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/video.js@latest/dist/video-js.min.cs" rel="stylesheet">
+<link rel="stylesheet" href="https://vsalema.github.io/tvpt4/css/tresmin.css" rel="stylesheet" type="text/css">
 
+  <style type="text/css">
+html {overflow: hidden;}
+body {background:black;padding:0;margin:0;}
 
-<meta name="robots" content="noindex">
-        <meta name="googlebot" content="noindex">
-        <meta name="referrer" content="no-referrer">
-	    <title>play m3u8 video</title>
-            <link rel="stylesheet" href="https://vsalema.github.io/tvpt4/css/tresmin.css" rel="stylesheet" type="text/css">
-	    <link href="https://unpkg.com/videojs-max-quality-selector@0.9.1/dist/videojs-max-quality-selector.css" rel="stylesheet">
-      
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.10.2/video.min.js"></script>
-        
-   <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-hls@latest/es5/videojs-contrib-hls.min.js"></script>
-        
-       
-
-<script src="https://cdn.jsdelivr.net/npm/header@0.1.1/index.min.js"></script>
-
-
+#tvrzInfos {font-size:1.7em;padding-bottom:2px;}	/*bouton d'ouverture de l'info tech */
+#tvrzInfos > * {z-index:999999;font-size:smaller;display:none; position:absolute; margin-top:-12em;margin-left:-20em; right:10px;
+				text-align:left; padding:10px;color:black; background:lightgrey;	border-radius: 10px; outline:1px solid black;}
+#tvrzInfos:hover > * {
+	display:block;
+    animation: 1s menuOn;
+	opacity:0;
+	animation-fill-mode: forwards;
+	visibility: visible;
+  }
+@keyframes menuOn{	
+	0% {visibility: hidden}
+	80% {opacity:0;}
+	100% {opacity:0.75;}  
+}
 
 
 
+.vjs-control-bar {font-size: calc(4px + 2vw); /*on augmente épaisseurs contrôles, taille semi-proportionnelle à écran*/
+}
+	
+.video-js .vjs-progress-control {
+    position:absolute;
+    width: calc(100% - 25px);
+    top:0;
+	left:0;
+    height:3px;
+    /* deal with resulting gap between progress control and control bar that
+       is the result of the attempt to keep things "clickable" on the controls */
+    background-color: #2B333F;
+    background-color: rgba(43, 51, 63, 0.7);
+}
 
-
- <script>
-            var x=document.URL;
-	        var res=x.split("?");
-	        //alert(res.length);
-	        if ( res.length==1 )
-	        {
-		        //alert("no video url!");
-	        }
-	        else
-	        {
-		        var videourl=decodeURIComponent(res[1]);
-		        if ( videourl.length === 0 )
-		        {
-			        //alert("no video url!");
-		        }
-                else
-                {
-                    // alert(videourl);
-                }
-	        }
-            function setupVideo() {
-                
-                var player = videojs('videoPlayer');
-                $("#geturl").attr("href", videourl);
-                $("#geturl").text(videourl);
-                player.src({
-                    src: videourl                    
-                });
-                player.responsive(true);
-                player.play();
-            }
-
-        </script>
-       <!-- Google tag (gtag.js) -->
-
-    </head>
-            
- 
-    <body oncontextmenu="return false" style="margin-left: 0px;margin-top: -19px;width:100%;height:auto;" onload="setupVideo()">
-        <br>
-        <!--<a id="geturl" href="" target="_blank">kkkk</a>-->
-    
-        <div style='width:100%;'>
-            <video autoplay id="videoPlayer" width="860" height="auto" autoplay class="video-js vjs-default-skin vjs-responsive  vjs-big-play-centered vjs-16-9" controls>
-                
-            </video>
-        </div>
-        <script src="https://players.brightcove.net/videojs-quality-menu/1/videojs-quality-menu.min.js"></script>
-<script src="https://unpkg.com/videojs-max-quality-selector@0.9.1/dist/videojs-max-quality-selector.min.js"></script>
-      
-  <script>
+.video-js .vjs-progress-holder {
+    position:absolute;
+    margin:0px;
+    top:0%;
+    width:100%;
+} 
   
-  (function(window, videojs) {
-     var player = window.player = videojs('videoPlayer');
-	  player.ready(function() {
-	  const muteButton = document.querySelector("");
-		  muteButton.click();
+
+/*
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-hover, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal:active, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active {
+  width: 50em !important;
+  transition: width 0.1s;
+}*/
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-mute-toggle-only {
+  width: 50em !important;
+}
+.vjs-volume-bar.vjs-slider-horizontal {
+  width: 50em !important;
+}
+
+/* aspect-ratio 4-1 en audio. videojs met padding-top:56.25% pour du 16/9 par la class : .video2-dimensions.vjs-fluid:not(.vjs-audio-only-mode)*/
+body[data-av="audio"] #video1 {padding-top:25%;} 	
+
+
+
+</style>
+
+</head>
+
+
+<body>
+	<video id="video1" class="video-js" class="vjs-default-skin" poster="" autoplay controls preload="auto">
+
+	</video>
+
+
 			
-		  var promise = player.play();
-		  if (promise !== undefined) {
-			  promise.then(function() {
-				  const muteButton = document.querySelector("");
-				}).catch(function(error) {
-				});
-			} else {
-			}
-		  });
-player.maxQualitySelector({
-		  displayCurrentQuality: false,
-	  });
-	}(window, window.videojs));
-  var player = videojs('my-video');
-player.maxQualitySelector({
-  'autoLabel': 'ABR' // Change the label from 'Auto' (default) to 'ABR'.
-});
- 
-      </script>    
-      
-      
-      
-      
-      <script>
-      
-       (()=>{let k=[{sel:"meta[property='og:image:secure_url']",attr:"content"},{sel:"meta[property='og:image']",attr:"content"},{sel:"link[as='image']",attr:"href"},{sel:"link[rel='thumbnail']",attr:"href"},{sel:"link[rel='image_src']",attr:"href"},{sel:"meta[property='twitter:image']",attr:"content"},{sel:"video",attr:"poster"},{sel:"#vp-preview",attr:"data-thumb"}];for(let S of k){let M=document.querySelectorAll(S.sel);for(let N of M){let j=N.getAttribute(S.attr);if(typeof j=="string")try{return new URL(j,window.location.href).href}catch{}}}return null})();
-      
-      
-      </script>
-        
-    </body>
+<script src="https://tvradiozap.eu/js/play52.js"></script>
+
+</body>
 </html>

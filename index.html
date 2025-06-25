@@ -4,28 +4,149 @@
 <meta name="referrer" content="no-referrer">
 
 <head>
-<script src="https://tvradiozap.eu/js/open52.js"></script>
+<script src="https://vsalema.github.io/play3/js/open52.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.cs">
 
-<script src="https://cdn.jsdelivr.net/npm/video.js@latest/dist/video.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/video.js@latest/dist/video-js.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://vsalema.github.io/tvpt4/css/tresmin.cs" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.0/css/nice-select.css">
 
-  
+<link rel="stylesheet" href="https://www.goiptv.top/site_assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://tvradiozap.eu/css/tvrz52.css">
+   
+<link rel="stylesheet" href="https://www.goiptv.top/site_assets/css/splide.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&display=swap" rel="stylesheet">
+<link href="https://www.goiptv.top/site_assets/videojs_player/css/videojs_style1.min.css" rel="stylesheet" type="text/css" />
+
+<!-- alternatives avec N°de version. ENLEVER .min pour fichier non compressés
+<link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video-js.min.css" rel="stylesheet"> -->
+
+<!-- alternatives locales pour dépannage
+<script src="https://tvradiozap.eu/js/video-8.22.0.js"></script>
+<link href="https://tvradiozap.eu/css/videojs-8.22.0.css" rel="stylesheet">-->
+
+
+<!-- Nécessaires pour affichage des temps, ainsi qu'options player 'currentTimeDisplay', 'timeDivider', 'durationDisplay' à mettre à true
+.vjs-current-time {
+  display: inline-block !important;
+}
+.vjs-time-divider {
+  display: inline-block !important;
+}
+.vjs-duration {
+  display: inline-block !important;
+}
+-->
+<style type="text/css">
+html {overflow: hidden;}
+body {background:black;padding:0;margin:0;}
+
+#tvrzInfos, #tvrzQuals {font-size:larger; margin-left:-15px;}	/*boutons d'ouverture de info tech et qualité */
+#tvrzInfos:hover > *, #tvrzQuals:hover > * { display:block; }
+
+#tvrzInfoContainer, #tvrzQualContainer {display:none; z-index:999999;position:absolute; margin-left:-300%;right:0;
+				padding:7px;outline:1px solid black;}
+				
+#tvrzInfoContainer {bottom:180%; text-align:left; color:black; border-radius: 10px; opacity:0.75; background:lightgrey; }
+#tvrzQualContainer {bottom:100%; text-align:right; color:white; cursor: pointer; background:rgba(70, 70, 70, 0.7);}
+
+#tvrzQualContainer > * {padding:3px;} 
+#tvrzQualContainer > *:not(:first-child):hover {background:grey;}
+
+
+#video1{
+	object-position: center;
+	width: 100%;
+}
+
+.vjs-control-bar {font-size: calc(1px + 2.2vw);}	/*on augmente épaisseurs contrôles, taille semi-proportionnelle à écran*/
+
+
+.video-js .vjs-progress-control {
+    position:absolute;
+    width: calc(100% - 25px);
+    top:0;
+	left:0;
+    height:3px;
+    /* deal with resulting gap between progress control and control bar that
+       is the result of the attempt to keep things "clickable" on the controls */
+    background-color: #2B333F;
+    background-color: rgba(43, 51, 63, 0.7);
+}
+
+.video-js .vjs-progress-holder {
+    position:absolute;
+    margin:0px;
+    top:0%;
+    width:100%;
+}
+
+/*
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-hover, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal:active, .video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-slider-active {
+  width: 50em !important;
+  transition: width 0.1s;
+}*/
+.video-js .vjs-volume-panel.vjs-volume-panel-horizontal.vjs-mute-toggle-only {
+  width: 50em !important;
+}
+.vjs-volume-bar.vjs-slider-horizontal {
+  width: 50em !important;
+}
+
+/* aspect-ratio en audio. videojs met padding-top:56.25% pour du 16/9 par la class : .video2-dimensions.vjs-fluid:not(.vjs-audio-only-mode)*/
+body[data-av="audio"] #video1 {padding-top:25%;} 	/*25% pour 4/1, 20% pour 5/1... */
+
+
+</style>
 
 </head>
 
 
 <body>
-	<video id="video1" class="video-js" class="vjs-default-skin" poster="" autoplay controls preload="auto">
-<!--	<source src="https://tvradiozap.eu/index.php/640" type="application/x-mpegURL">
+	<video id="video1" class="video-js" class="vjs-default-skin" poster="/im/tvrzPoster.gif" controls></video>
+	
+<!--	<source src="https://tvradiozap.eu/index.php/640" type="video/mp4">
 		<source src="https://icecast.radiofrance.fr/franceculture-hifi.aac">
 		<source src="https://artesimulcast.akamaized.net/hls/live/2031003-b/artelive_fr/master_v720.m3u8" type="application/x-mpegURL">
-		<source src="https://tv7.live-kd.com/live/tv7/ngrp:tv7_Wifi/manifest.mpd" type="application/dash+xml"> -->
-	</video>
+		<source src="https://tv7.live-kd.com/live/tv7/ngrp:tv7_Wifi/manifest.mpd" type="application/dash+xml">
+	<script src="/js/jsplay53.js"></script> -->
+	
+<script>
+	var el = document.getElementsByName('v')[0];
+	el.addEventListener("keypress", goPlay, false);
+	function goPlay(e){
+		if (e.keyCode === 13)
+			play();
+	}
+	
+	//initialiser le champ d'input avec l'éventuelle url en query
+	var url = decodeURIComponent(window.location.search.substring(1));	//retourne la query sans "?"
+	url = url.replace(/%20/g, " ");		//NB decodeURI ne touche pas aux espaces
+	el.value=url;						//query de l'url mise dans l'input
+
+function play() {
+
+	//l'historique est conservé mais la page non rechargée car seul la query change
+	history.pushState( {}, null, '/tools/joue.html?'+(url = decodeURIComponent(el.value)) );
+	
+	if (url.substring(0,5)==='https')
+		window.open(decodeURIComponent('https://vsalema.github.io/play2/?'+url),'_self');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
+	else
+		window.open(decodeURIComponent('https://vsalema.github.io/play2/?'+url),'_self');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
+	return false;
+}
+
+</script>
+	
+	
+	
+	<template>
+	<div>ℚ<div id="tvrzQualContainer" onclick="setQualityLevel(event.target.id);"><div><span style="margin:auto; font-weight:700;">Qualités</span><br></div><div>✔Auto</div></div></div>
+	<div>🛈<div id="tvrzInfoContainer"><div><span style="margin:auto; font-weight:700;">Infos techniques</span><br><br></div></div></div>
+</template>
 
 
-			
-<script src="https://tvradiozap.eu/js/play52.js"></script>
+<script src="https://vsalema.github.io/play3/js/play52.js"></script>
 
 </body>
 </html>

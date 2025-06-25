@@ -4,18 +4,9 @@
 <meta name="referrer" content="no-referrer">
 
 <head>
-<script src="https://vsalema.github.io/play3/js/open52.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.cs">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.0/css/nice-select.css">
-
-<link rel="stylesheet" href="https://www.goiptv.top/site_assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://tvradiozap.eu/css/tvrz52.css">
-   
-<link rel="stylesheet" href="https://www.goiptv.top/site_assets/css/splide.min.css">
-
-<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&display=swap" rel="stylesheet">
-<link href="https://www.goiptv.top/site_assets/videojs_player/css/videojs_style1.min.css" rel="stylesheet" type="text/css" />
+<script src="https://tvradiozap.eu/js/open55.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/video.js@latest/dist/video.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/video.js@latest/dist/video-js.min.css" rel="stylesheet">
 
 <!-- alternatives avec N°de version. ENLEVER .min pour fichier non compressés
 <link href="https://cdn.jsdelivr.net/npm/video.js@8.22.0/dist/video.min.js" rel="stylesheet">
@@ -111,42 +102,13 @@ body[data-av="audio"] #video1 {padding-top:25%;} 	/*25% pour 4/1, 20% pour 5/1..
 		<source src="https://tv7.live-kd.com/live/tv7/ngrp:tv7_Wifi/manifest.mpd" type="application/dash+xml">
 	<script src="/js/jsplay53.js"></script> -->
 	
-<script>
-	var el = document.getElementsByName('v')[0];
-	el.addEventListener("keypress", goPlay, false);
-	function goPlay(e){
-		if (e.keyCode === 13)
-			play();
-	}
-	
-	//initialiser le champ d'input avec l'éventuelle url en query
-	var url = decodeURIComponent(window.location.search.substring(1));	//retourne la query sans "?"
-	url = url.replace(/%20/g, " ");		//NB decodeURI ne touche pas aux espaces
-	el.value=url;						//query de l'url mise dans l'input
-
-function play() {
-
-	//l'historique est conservé mais la page non rechargée car seul la query change
-	history.pushState( {}, null, '/tools/joue.html?'+(url = decodeURIComponent(el.value)) );
-	
-	if (url.substring(0,5)==='https')
-		window.open(decodeURIComponent('https://vsalema.github.io/play2/?'+url),'_self');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
-	else
-		window.open(decodeURIComponent('https://vsalema.github.io/play2/?'+url),'_self');	//même nom de target que depuis index.php mais pas même browser context => pas le même TAB
-	return false;
-}
-
-</script>
-	
-	
-	
-	<template>
+<template>
 	<div>ℚ<div id="tvrzQualContainer" onclick="setQualityLevel(event.target.id);"><div><span style="margin:auto; font-weight:700;">Qualités</span><br></div><div>✔Auto</div></div></div>
 	<div>🛈<div id="tvrzInfoContainer"><div><span style="margin:auto; font-weight:700;">Infos techniques</span><br><br></div></div></div>
 </template>
 
 
-<script src="https://vsalema.github.io/play3/js/play52.js"></script>
+<script src="https://tvradiozap.eu/js/play55.js"></script>
 
 </body>
 </html>

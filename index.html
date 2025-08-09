@@ -8,7 +8,9 @@
 <meta name="robots" content="nofollow">
 <meta name="googlebot" content="noindex">
 	<head>
-<script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+
+		<link href="https://unpkg.com/videojs-max-quality-selector@0.9.1/dist/videojs-max-quality-selector.css" rel="stylesheet">
+		<script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
 		<style>
 
 		</style>
@@ -165,10 +167,43 @@ function play() {
           </video>
 
 </div>
-
+ <script src="https://players.brightcove.net/videojs-quality-menu/1/videojs-quality-menu.min.js"></script>
+<script src="https://unpkg.com/videojs-max-quality-selector@0.9.1/dist/videojs-max-quality-selector.min.js"></script>
+	
+	<script>
+var player = videojs('video1');
+player.maxQualitySelector({
+  'defaultQuality': 2 // Make the video start playing at the highest quality possible
+});
+var myPlayer = videojs('video1');
+myPlayer.ready(function () {
+  console.log("downloadvideo");
+  });
 </script>
 	
-
+<script>
+  
+  (function(window, videojs) {
+     var player = window.player = videojs('video1');
+	  player.ready(function() {
+	  const muteButton = document.querySelector("");
+		  muteButton.click();
+			
+		  var promise = player.play();
+		  if (promise !== undefined) {
+			  promise.then(function() {
+				  const muteButton = document.querySelector("");
+				}).catch(function(error) {
+				});
+			} else {
+			}
+		  });
+player.maxQualitySelector({
+		  displayCurrentQuality: false,
+	  });
+	}(window, window.videojs));
+  
+  </script>
 	
 	<script src="https://play.shidur.net/node_modules/video.js/dist/video.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/videojs-youtube/2.6.0/Youtube.min.js'></script>
@@ -186,5 +221,6 @@ function play() {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.0/js/jquery.nice-select.min.js"></script> 
 </body>
 </html>
+
 
 

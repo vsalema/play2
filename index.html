@@ -14,7 +14,19 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.20.1/video.min.js"></script>
 		
 		<style>
+html {overflow: hidden;}
+body {background:black;padding:0;margin:0;}
 
+#tvrzInfos {font-size:1.7em;padding-bottom:2px;}	/*bouton d'ouverture de l'info tech */
+#tvrzInfos > * {z-index:999999;font-size:smaller;display:none; position:absolute; margin-top:-12em;margin-left:-20em; right:10px;
+				text-align:left; padding:10px;color:black; background:lightgrey;	border-radius: 10px; outline:1px solid black;}
+#tvrzInfos:hover > * {
+	display:block;
+    animation: 1s menuOn;
+	opacity:0;
+	animation-fill-mode: forwards;
+	visibility: visible;
+  }
 		</style>
 <script src="https://vsalema.github.io/play3/js/open52.js"></script>
 
@@ -226,6 +238,7 @@ player.maxQualitySelector({
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.0/js/jquery.nice-select.min.js"></script> 
 </body>
 </html>
+
 
 
 
